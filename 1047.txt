@@ -1,0 +1,51 @@
+package leetcode_first_try;
+
+public class aabbca {
+	
+	static char[] StringToChar(String problem) {
+	    char[] CharArray=new char[problem.length()];
+	    for(int i=0;i<problem.length();i++) {
+	    	CharArray[i]=problem.charAt(i);
+	    }
+	    return CharArray;
+	  }
+
+	
+	static int Check(char[] chararr) {
+		for(int i=0;i<chararr.length-1;i++) {
+			if((chararr[i]==chararr[i+1]) && chararr[i]!='\0') {
+					return i;
+				}
+			}
+		return -1;
+		}
+	
+	static char[] Delete(char[] chararr,int i) {
+		char[] CharArray=new char[chararr.length-2];
+		int l=0;
+		for(int k=0;k<chararr.length;k++) {
+			if((k!=i) && (k!=i+1)) {
+				CharArray[l]=chararr[k];
+				l++;
+			}
+		}
+		return CharArray;
+	  }
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String problem=new String();
+		problem="abccba";
+		
+		char[] CharArray1=new char[problem.length()];
+		CharArray1=StringToChar(problem);;
+		while(Check(CharArray1)!=-1) {
+			CharArray1=Delete(CharArray1,Check(CharArray1));
+		}
+		
+		System.out.print(CharArray1.length);
+	}
+
+
+}
