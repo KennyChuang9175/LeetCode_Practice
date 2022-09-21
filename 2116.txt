@@ -1,0 +1,50 @@
+import java.util.Stack;
+class Solution {
+    
+    public boolean canBeValid(String s, String locked) {
+        //##2 pass way 
+        //1.檢查是否為偶數
+        if(s.length()%2!=0)
+            return false;
+        
+        //2.計算左到右 '(' , '0' ,數量
+        int right=0,left=0,check=0;
+        
+        for(int i =0;i<s.length();i++){
+            if (s.charAt(i)=='('  )
+               check++;
+            else{
+                if(locked.charAt(i)=='0')
+                    check+=1;
+                else
+                    check-=1;
+            }
+               
+            
+            if(check<0)
+                return false;
+        }
+        check=0;
+        //3.計算右到左 ')' , '0' ,數量
+        for(int i =s.length()-1;i>=0;i--){
+            if (s.charAt(i)==')')
+               check++;
+            else{
+                if(locked.charAt(i)=='0')
+                    check+=1;
+                else
+                    check-=1;
+            }
+                
+            
+            if(check<0)
+                return false;
+        }
+        
+        
+        
+        return true;
+        
+    }
+    
+}
