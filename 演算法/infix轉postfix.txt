@@ -1,0 +1,106 @@
+package 演算法;
+
+import java.util.Random;
+import java.util.Stack;
+public class Infix轉Postfix {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String a=new String("a*(b+c/d)+e");
+		char y;
+		Stack<Character> st = new Stack<Character>();
+		int charnum=0;
+		st.push(' ');
+		for(int i=0;i<a.length();i++) {
+			charnum=a.charAt(i)-'0';
+			//System.out.println("第"+i+"次"+"   "+st);
+			if(charnum>=49 && charnum<=74) {
+				System.out.print(a.charAt(i));
+			}
+			else {
+				if(a.charAt(i)==')') {
+					y=st.pop();
+					while(!st.empty() && y!='(') {
+						System.out.print(y);
+						y=st.pop();
+					}
+				}
+				else {
+					if(check(a.charAt(i),st.peek())=='>') {
+						st.push(a.charAt(i));
+					}
+					else {
+						while(check(a.charAt(i),st.peek())!='>') {
+							y=st.pop();
+							System.out.print(y);
+						}
+						st.push(a.charAt(i));
+					}
+				}
+			}
+			
+		}
+		while(!st.empty()) {
+			System.out.print(st.pop());
+		}
+		
+	}
+	
+	public static char check(char outs,char ins) {
+		if(out(outs)>in(ins)) 
+			return'>';
+		else
+			return'<';
+	}
+	
+	public static int out(char outs) {
+		int an=0;
+		switch(outs) {
+			case '(':
+				an=100;
+				break;
+			case '+':
+				an=80;
+				break;
+			case '-':
+				an=80;
+				break;
+			case '*':
+				an=90;
+				break;
+			case '/':
+				an=90;
+				break;
+			case ' ':
+				an=0;
+				break;
+		}
+		return an;
+	}
+	
+	public static int in(char ins) {
+		int ani=0;
+		switch(ins) {
+			case '(':
+				ani=50;
+				break;
+			case '+':
+				ani=80;
+				break;
+			case '-':
+				ani=80;
+				break;
+			case '*':
+				ani=90;
+				break;
+			case '/':
+				ani=90;
+				break;	
+			case ' ':
+				ani=0;
+				break;
+		}
+		return ani;
+	}
+
+}
