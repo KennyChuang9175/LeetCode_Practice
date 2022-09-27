@@ -1,0 +1,91 @@
+class MyCircularQueue {
+
+    int  a[];
+	int insert=0,bottom=0,delete=0,top=0;
+	int max;
+	public MyCircularQueue(int k) {
+		a=new int[k];
+		max=k;
+    }
+    
+    public boolean enQueue(int value) {
+    	if(isFull())
+    		return false;
+    	else {
+    		a[top]=value;
+    		top+=1;
+    		if(top>max-1)
+    			top=0;
+    		insert+=1;
+    		return true;
+    	}
+    		
+    	
+		
+    }
+    
+    public boolean deQueue() {
+    	if(isEmpty())
+    		return false;
+    	else {
+    		bottom+=1;
+    		if(bottom>max-1)
+    			bottom=0;
+    		insert-=1;
+    		return true;
+    	}
+        
+    }
+    
+    public int Front() {
+        if(isEmpty())
+            return -1;
+        else
+		    return a[bottom];
+        
+    }
+    
+    public int Rear() {
+    	int pointer;
+        
+        if(isEmpty())
+            return -1;
+        else
+		    if(top-1<0)
+    		    pointer=max-1;
+    	    else
+    		    pointer=top-1;
+    	    return a[pointer];
+    	
+
+    }
+    
+    public boolean isEmpty() {
+    	if(insert==0)
+    		return true;
+    	else
+    		return false;
+        
+    }
+    
+    public boolean isFull() {
+    	
+    	if(insert==max) 
+    		return true;
+    	else
+    		return false;
+    		
+    	
+    }
+}
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * boolean param_1 = obj.enQueue(value);
+ * boolean param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * boolean param_5 = obj.isEmpty();
+ * boolean param_6 = obj.isFull();
+ */

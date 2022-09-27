@@ -1,0 +1,86 @@
+package 演算法;
+
+public class PushDominoes838 {
+	static String dominoe;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String dominoes="R..L..R..LR.R.R.....";
+        char front='.';
+        int dot=0;
+        for(int i =0;i<dominoes.length();i++){
+        	if(dominoes.charAt(i)=='.') {
+        		dot+=1;
+        	}
+        	else {
+        		if(dominoes.charAt(i)=='R') {								//R
+        			if(front=='L') {										//L...R
+        				for(int j=0;j<dot;j++) {
+        					System.out.print('.');
+        				}
+        			}
+        			else {													
+        				if(front=='R') {								//R...R
+        					for(int j=0;j<dot;j++) {
+            					System.out.print('R');
+            				}
+        				}
+        				else {											//...R
+        					for(int j=0;j<dot;j++) {
+            					System.out.print('.');
+            				}
+        				}
+        					
+        				
+        			}
+        		}
+        		else {														//L
+        			if(front=='R') {										//R..L
+        				if(dot%2==0) {										//R..L偶
+        					for(int j=0;j<dot;j++) {
+            					if(j<dot/2)
+            						System.out.print('R');
+            					else
+            						System.out.print('L');
+            				}
+        				}
+        				else {												//R..L基
+        					for(int j=0;j<dot;j++) {
+            					if(j<dot/2)
+            						System.out.print('R');
+            					else if(j==dot/2)
+            						System.out.print('.');
+            					else
+            						System.out.print('L');
+            				}
+        				}
+        			}
+        			else {													//..L
+        				for(int j=0;j<dot;j++) {
+        					System.out.print('L');
+        				}
+        			}       			
+        		}
+        		System.out.print(dominoes.charAt(i));
+        		front=dominoes.charAt(i);
+        		dot=0;
+        	}
+        }
+        if(dot!=0) {
+        	if(front=='L'){
+        		for(int j=0;j<dot;j++) {
+            		System.out.print('.');
+    			}
+        	}
+        	else {
+        		for(int j=0;j<dot;j++) {
+            		System.out.print('R');
+    			}
+        	}
+        }
+		
+	}
+	
+	
+
+}
