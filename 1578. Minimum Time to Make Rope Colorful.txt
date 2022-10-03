@@ -1,0 +1,32 @@
+class Solution {
+    public int minCost(String colors, int[] neededTime) {
+        int total=0,j;
+        int min=0;
+        for(int i=0;i<colors.length();){
+            min=0;
+            j=1;
+            
+            do{
+                if(i+j>colors.length()-1) break;
+                // System.out.println(i+" "+(i+j));
+                if(colors.charAt(i)==colors.charAt(i+j)){
+                    if(neededTime[i]<neededTime[i+j]){
+                        min=neededTime[i];
+                        i=i+j;
+                        j=1;
+                    }
+                    else{
+                         min=neededTime[i+j];
+                         j++;
+                    }
+                    total=total+min;
+                }
+                if(i+j>colors.length()-1) break;
+                // System.out.println("min= "+min+"   "+total);
+                // System.out.println(i+" "+(i+j));
+            }while(colors.charAt(i)==colors.charAt(i+j));
+            i=i+j;
+        }
+        return total;
+    }        
+}
