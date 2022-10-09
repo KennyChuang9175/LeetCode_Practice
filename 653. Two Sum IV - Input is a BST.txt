@@ -1,0 +1,52 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int a[];
+    int i=0,k=0;
+    public boolean findTarget(TreeNode root, int k) {
+        a=new int[st(root)];                               //宣告array大小                       
+        ss(root);                                           
+        for(int j=0;j<a.length;j++){                       //array內依序相加檢查答案
+            int l=j+1;
+            while(l<a.length){
+                if(a[j]+a[l]==k)
+                    return true;
+                l++;
+            }
+        }
+        return false;
+    }
+    public int st(TreeNode root) {                         //以後序尋訪得到nodetree總數
+        
+        if(root==null) return 0;
+        
+        st(root.left);        //後序
+        st(root.right);
+        i+=1;
+        return i; 
+        
+    }
+    
+    public void ss(TreeNode root) {                         //將node內的樹放入array
+        
+        if(root==null) return;
+        
+        ss(root.left);        //後序
+        ss(root.right);
+        a[k]=root.val;
+        k++;  
+    }
+}
