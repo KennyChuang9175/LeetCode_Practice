@@ -1,0 +1,37 @@
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        int i=0;
+        int max=0,min=99999,re=9999;
+        
+        for(int aa=0;aa<nums.length;aa++){
+            if(nums[aa]>max)
+                max=nums[aa];
+            if(nums[aa]<min)
+                min=nums[aa];
+        }
+
+        if(max-min<2)
+            return false;
+        
+        if(nums.length<3)
+            return false;
+        while(i<nums.length-2){
+            if(nums[i]<re){
+                for(int j=i+1;j<nums.length-1;j++){
+                    if(nums[j]>nums[i]){
+                        // System.out.println("j= "+nums[j]);
+                        for(int k=j+1;k<nums.length;k++){
+                            // System.out.println("k= "+nums[k]);
+                            if(nums[k]>nums[j])
+                                return true;
+                        }
+                    }
+                re=nums[i];
+                }
+            }
+            
+            i++;
+        }
+        return false;
+    }
+}
