@@ -1,0 +1,23 @@
+
+class Solution {
+    public int largestPerimeter(int[] num) {
+        int j,k;
+        Arrays.sort(num);                           //sort array
+        
+        for(int i=num.length-1;i>1;i--){          //find 3 bigest side to check If it is impossible to form any triangle of a non-zero area
+            if(check(num[i],num[i-1],num[i-2]))       //ex:[1,2,3,4,6,10]   "check(4,6,10)" is impossible       
+                return num[i]+num[i-1]+num[i-2];      //          k,j,i    <=(j=i-1 , k=i-2)                                            
+        }                                             //   [1,2,3,4,6,10]   "check(3,4,6)" is possible => "return"                 
+                                                      //        k,j,i      <=(j=i-1 , k=i-2)     
+        
+            
+       return 0;
+       
+    }
+    
+    public boolean check(int a,int b,int c) {    //check If it is impossible to form any triangle of a non-zero area
+      if (a+b>c && a+c>b && b+c>a)
+          return true;
+      return false;
+    }
+}
